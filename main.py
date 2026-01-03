@@ -1,53 +1,46 @@
 import discord
+import messageProcessor as msgPro
 from discord.ext import commands
+# from discord import app_commands
 import logging
 from dotenv import load_dotenv
 import os
 from time import sleep
+import random
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
 
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 intents = discord.Intents.default()
+
 intents.message_content = True
 intents.members = True
 
-bot = commands.Bot(command_prefix="r.", intents=intents)
+bot = commands.Bot(command_prefix="r.", owner_id=916816688186527844, intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f"Ready, {bot.user.name}")
-    print(bot.users)
-
-@bot.event
-async def on_member_join(member):
-    await member.send(f"Get the fuck out, {member.name}")
+    print(f"{bot.user} is online")
+    await bot.tree.sync()
 
 @bot.event
 async def on_message(message):
-    nameOfUser = message.author.global_name
-    sleep(0.1)
-
-    if message.author == bot.user:
-        return
-
-    if "hallo" in message.content.lower():
-        await message.channel.send(f"hallo {nameOfUser}!")
-
-    if "goedemorgen" in message.content.lower():
-        await message.channel.send(f"Good morning to you, {nameOfUser}!")
-
-    if "goede nacht" in message.content.lower():
-        await message.channel.send(f"Good night to you too, {nameOfUser}!")
-
-    if "goodbye, rukhusha" in message.content.lower():
-        await message.channel.send(f"goodbye, {nameOfUser}.")
+    if message.author != bot.user:
+        await msgPro.process(message)
 
     await bot.process_commands(message)
 
-@bot.command()
-async def hug(ctx, *, target):
-    await ctx.send(f"*{ctx.author.global_name} sends hugs to {target}!*")
+@bot.tree.command(name="hug", description="Send Rukhusha a virtual hug!")
+async def hug(interaction: discord.Interaction):
+    username = interaction.user.mention
+    await interaction.response.send_message(f"*{username} sent a virtual hug to Rukhusha!*")
+    sleep(1)
+    await interaction.user.send(f"Thank you, {interaction.user.global_name}!")
 
-bot.run(token, log_handler = handler, log_level=logging.DEBUG)
+@bot.tree.command(name="coinflip", description="Flips a coin.")
+async def coinflip(interaction: discord.Interaction):
+    username = interaction.user.mention
+    await interaction.response.send_message(f"{username}, the coin landed on {"Heads" if random.randint(0,1) == 0 else "Tails" }.")
+
+bot.run(token, log_handler=handler, log_level=logging.DEBUG)
