@@ -1,5 +1,4 @@
 import discord
-import messageProcessor as msgPro
 from discord.ext import commands
 # from discord import app_commands
 import logging
@@ -7,6 +6,7 @@ from dotenv import load_dotenv
 import os
 from time import sleep
 import random
+from inspirational_quotes import quote
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
@@ -27,7 +27,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if message.author != bot.user:
-        await msgPro.process(message)
+        return
 
     await bot.process_commands(message)
 
@@ -43,4 +43,11 @@ async def coinflip(interaction: discord.Interaction):
     username = interaction.user.mention
     await interaction.response.send_message(f"{username}, the coin landed on {"Heads" if random.randint(0,1) == 0 else "Tails" }.")
 
-bot.run(token, log_handler=handler, log_level=logging.DEBUG)
+@bot.tree.command(name="inspirational_quote", description="Sends you an inspiration quote!")
+async def inspirational_quote(interaction: discord.Interaction):
+    q = quote()
+    print(q)
+    await interaction.response.send_message(f"*{q['quote']}*\n{q['author']}")
+
+if __name__ == "__main__":
+    bot.run(token, log_handler=handler, log_level=logging.DEBUG)
