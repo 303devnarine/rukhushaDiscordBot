@@ -1,4 +1,5 @@
 import discord
+import messageProcessor as msgPro
 from discord.ext import commands
 # from discord import app_commands
 import logging
@@ -7,6 +8,8 @@ import os
 from time import sleep
 import random
 from inspirational_quotes import quote
+from threading import Thread
+from flask import Flask
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
@@ -19,6 +22,21 @@ intents.members = True
 
 bot = commands.Bot(command_prefix="r.", owner_id=916816688186527844, intents=intents)
 
+# Flask app for health checks
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Discord bot is running!", 200
+
+@app.route('/health')
+def health():
+    return "OK", 200
+
+def run_flask():
+    port = int(os.getenv("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
+
 @bot.event
 async def on_ready():
     print(f"{bot.user} is online")
@@ -27,7 +45,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if message.author != bot.user:
-        return
+        await msgPro.process(message)
 
     await bot.process_commands(message)
 
@@ -50,4 +68,10 @@ async def inspirational_quote(interaction: discord.Interaction):
     await interaction.response.send_message(f"*{q['quote']}*\n{q['author']}")
 
 if __name__ == "__main__":
+    # Start Flask server in a separate thread
+    flask_thread = Thread(target=run_flask)
+    flask_thread.daemon = True
+    flask_thread.start()
+    
+    # Start Discord bot
     bot.run(token, log_handler=handler, log_level=logging.DEBUG)
