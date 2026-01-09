@@ -1,5 +1,5 @@
 import discord
-import messageProcessor as msgPro
+# import messageProcessor as msgPro
 from discord.ext import commands
 # from discord import app_commands
 import logging
@@ -45,7 +45,8 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if message.author != bot.user:
-        await msgPro.process(message)
+        # await msgPro.process(message)
+        return
 
     await bot.process_commands(message)
 
@@ -75,3 +76,4 @@ if __name__ == "__main__":
     
     # Start Discord bot
     bot.run(token, log_handler=handler, log_level=logging.DEBUG)
+
