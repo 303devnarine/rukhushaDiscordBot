@@ -34,7 +34,7 @@ def health():
     return "OK", 200
 
 def run_flask():
-    port = int(os.getenv("PORT", 10000))
+    port = int(os.getenv("PORT", 15500))
     app.run(host='0.0.0.0', port=port)
 
 @bot.event
@@ -76,4 +76,5 @@ if __name__ == "__main__":
     
     # Start Discord bot
     bot.run(token, log_handler=handler, log_level=logging.DEBUG)
+
 
