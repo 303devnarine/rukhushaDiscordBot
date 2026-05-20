@@ -8,7 +8,7 @@ import random
 from inspirational_quotes import quote
 from threading import Thread
 from flask import Flask
-from tarot import Card
+import tarot
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
@@ -70,7 +70,7 @@ async def inspirational_quote(interaction: discord.Interaction):
 @bot.tree.command(name="tarot", description="Sends you a random tarot card, with its meaning.")
 async def tarot(interaction: discord.Interaction):
     card = tarot.drawCard()
-    await interaction.response.send_message(f"{card.id} **{card.name}** ({card.suit})\n{card.meaning}")
+    await interaction.response.send_message(f"{card["id"]} **{card["name"]}** ({card["suit"]})\n{card["meaning"]")
 
 if __name__ == "__main__":
    # Start Flask server in a separate thread
