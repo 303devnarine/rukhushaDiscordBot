@@ -100,5 +100,7 @@ class TarotDeck:
     ]
 
 def drawCard():
-    i = random.randint(78)
-    return [i]
+    card = random.choice(TarotDeck.cards)
+    is_reversed = random.randint(0, 1) == 1
+    meaning = card.reversed if is_reversed else card.upright
+    return {"id": card.id, "name": f"{card.name} {"Reversed" if is_reversed else "Upright"}", "suit": card.suit, "meaning": meaning}
