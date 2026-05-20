@@ -101,4 +101,4 @@ class TarotDeck:
 
 def drawCard():
     i = random.randint(78)
-    return i
+    return [i]
