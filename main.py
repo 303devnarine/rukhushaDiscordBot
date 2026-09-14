@@ -45,7 +45,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
    if message.author != bot.user:
-      # await msgPro.process(message)
+      await interaction.response.send_message(":")
       return
 
    await bot.process_commands(message)
