@@ -68,7 +68,7 @@ async def inspirational_quote(interaction: discord.Interaction):
 
 @bot.tree.command(name="tarot", description="Sends you a random tarot card, with its meaning.")
 async def tarot(interaction: discord.Interaction):
-    card = tarot.drawCard()
+	
     await interaction.response.send_message("This feature is still being worked on!")
 
 if __name__ == "__main__":
