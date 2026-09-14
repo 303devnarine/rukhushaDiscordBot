@@ -49,13 +49,6 @@ async def on_message(message):
 
    await bot.process_commands(message)
 
-@bot.tree.command(name="hug", description="Send Rukhusha a virtual hug!")
-async def hug(interaction: discord.Interaction):
-   username = interaction.user.mention
-   await interaction.response.send_message(f"*{username} sent a virtual hug to Rukhusha!*")
-   sleep(2)
-   await interaction.user.send(f"Thank you, {interaction.user.global_name}!")
-
 @bot.tree.command(name="coinflip", description="Flips a coin.")
 async def coinflip(interaction: discord.Interaction):
    username = interaction.user.mention
@@ -69,7 +62,7 @@ async def inspirational_quote(interaction: discord.Interaction):
 @bot.tree.command(name="tarot", description="Sends you a random tarot card, with its meaning.")
 async def tarot(interaction: discord.Interaction):
 	
-    await interaction.response.send_message("This feature is still being worked on!")
+    await interaction.response.send_message(tarot.drawCard())
 
 if __name__ == "__main__":
    # Start Flask server in a separate thread
