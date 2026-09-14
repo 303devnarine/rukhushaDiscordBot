@@ -67,7 +67,7 @@ async def tarot(interaction: discord.Interaction):
    
    try:
    	await interaction.response.send_message(tarot.drawCard())
-   else:
+   finally:
    	await interaction.response.send_message("yep, still in development. (dev is slow)")
 
 if __name__ == "__main__":
