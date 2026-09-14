@@ -26,7 +26,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-   return "Discord bot is running!", 200
+   return "<h1> Discord bot is running! </h1>", 200
 
 @app.route('/health')
 def health():
@@ -53,14 +53,13 @@ async def on_message(message):
 async def hug(interaction: discord.Interaction):
    username = interaction.user.mention
    await interaction.response.send_message(f"*{username} sent a virtual hug to Rukhusha!*")
-   sleep(1)
+   sleep(2)
    await interaction.user.send(f"Thank you, {interaction.user.global_name}!")
 
 @bot.tree.command(name="coinflip", description="Flips a coin.")
 async def coinflip(interaction: discord.Interaction):
    username = interaction.user.mention
-   await interaction.response.send_message(
-      f"{username}, the coin landed on {"Heads" if random.randint(0, 1) == 0 else "Tails"}.")
+   await interaction.response.send_message(f"{username}, the coin landed on {"Heads" if random.randint(0, 1) == 0 else "Tails"}.")
 
 @bot.tree.command(name="inspirational_quote", description="Sends you an inspiration quote!")
 async def inspirational_quote(interaction: discord.Interaction):
@@ -70,7 +69,7 @@ async def inspirational_quote(interaction: discord.Interaction):
 @bot.tree.command(name="tarot", description="Sends you a random tarot card, with its meaning.")
 async def tarot(interaction: discord.Interaction):
     card = tarot.drawCard()
-    await interaction.response.send_message(f"{card["id"]} **{card["name"]}** ({card["suit"]})\n{card["meaning"]}")
+    await interaction.response.send_message("This feature is still being worked on!")
 
 if __name__ == "__main__":
    # Start Flask server in a separate thread
