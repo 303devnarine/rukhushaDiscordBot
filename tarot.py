@@ -100,6 +100,6 @@ class TarotDeck:
     ]
 
 	def drawCard(self):
-	    return cards
+	    return cards[0]
 
 
