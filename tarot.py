@@ -99,5 +99,5 @@ class TarotDeck:
         Card(77, "King of Pentacles",  Suit.PENTACLES, "Wealth, business, leadership, security, discipline",  "Financially inept, obsessed with wealth, stubborn"),
     ]
 
-def drawCard():
-    return "card"
+	def drawCard():
+	    return "card"
