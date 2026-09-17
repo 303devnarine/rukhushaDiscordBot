@@ -62,7 +62,8 @@ async def inspirational_quote(interaction: discord.Interaction):
 
 @bot.tree.command(name="tarot", description="Sends you a random tarot card, with its meaning.")
 async def tarot(interaction: discord.Interaction):
-   await interaction.response.send_message(TarotDeck.cards[0])
+   card = TarotDeck.drawCard()
+   await interaction.response.send_message(f"{card}")
 
 if __name__ == "__main__":
    # Start Flask server in a separate thread
