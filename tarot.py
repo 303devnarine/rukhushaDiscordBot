@@ -18,6 +18,9 @@ class Card:
     reversed: str
 
 class TarotDeck:
+    def __init__(self):
+        print("deck initialized")
+    
     cards = [
         Card(0,  "The Fool",           Suit.MAJOR_ARCANA, "New beginnings, spontaneity, a free spirit",         "Recklessness, risk-taking, inconsideration"),
         Card(1,  "The Magician",       Suit.MAJOR_ARCANA, "Willpower, resourcefulness, skill",                  "Manipulation, poor planning, untapped talents"),
@@ -98,8 +101,8 @@ class TarotDeck:
         Card(76, "Queen of Pentacles", Suit.PENTACLES, "Nurturing, practical, providing financially, warmth", "Financial independence, self-care, work-home conflict"),
         Card(77, "King of Pentacles",  Suit.PENTACLES, "Wealth, business, leadership, security, discipline",  "Financially inept, obsessed with wealth, stubborn"),
     ]
-
-	def drawCard(self):
-	    return cards[0]
+    
+    def drawCard(self): 
+        return cards[0]
 
 
