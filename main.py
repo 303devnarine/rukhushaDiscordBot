@@ -153,8 +153,7 @@ class TarotDeck:
     ]
     
     def drawCard(self): 
-        return cards[0]
-
+        return cards[randInt(0,77)]
 
 deck = TarotDeck()
 @bot.tree.command(name="tarot", description="Sends you a random tarot card, with its meaning.")
