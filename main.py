@@ -60,7 +60,6 @@ async def inspirational_quote(interaction: discord.Interaction):
    q = quote()
    await interaction.response.send_message(f"*{q['quote']}*\n{q['author']}")
 
-@dataclass(frozen=True)
 class Card:
     id: int
     name: str
