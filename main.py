@@ -60,6 +60,13 @@ async def inspirational_quote(interaction: discord.Interaction):
    q = quote()
    await interaction.response.send_message(f"*{q['quote']}*\n{q['author']}")
 
+class Suit(Enum):
+    MAJOR_ARCANA = "MAJOR ARCANA"
+    WANDS = "WANDS"
+    CUPS = "CUPS"
+    SWORDS = "SWORDS"
+    PENTACLES = "PENTACLES"
+
 class Card:
     id: int
     name: str
