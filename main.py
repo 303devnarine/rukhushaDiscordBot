@@ -48,6 +48,7 @@ async def on_message(message):
 @bot.tree.command(name="coinflip", description="Flips a coin.")
 async def coinflip(interaction: discord.Interaction):
    username = interaction.user.mention
+   sleep(1)
    await interaction.response.send_message(f"{username}, the coin landed on {'Heads' if random.randint(0, 1) == 0 else 'Tails'}.")
 
 @bot.tree.command(name="inspirational_quote", description="Sends you an inspiration quote!")
@@ -148,7 +149,7 @@ async def tarot(interaction: discord.Interaction):
    card = cards[random.randint(0,77)]
    reversed = random.randint(0, 1) == 0
    suit_emoji = '🪄' if card[2] == Suit.WANDS else '⛤' if card[2] == Suit.PENTACLES else '🗡️' if card[2] == Suit.SWORDS else '𐃯' if card[2] == Suit.CUPS else '🎴'
-   
+   sleep(1)
    await interaction.response.send_message(f"🔮✨ Your card is... ***{card[0]} - {card[1].upper()}{' - REVERSED' if reversed else ''}*** ✨🃏\n**__\t\t\t\t\t\t\tmeaning:\t\t\t\t\t\t\t__**\n{suit_emoji} *\"{card[4] if reversed else card[3]}\"* {suit_emoji}")
 
 if __name__ == "__main__":
