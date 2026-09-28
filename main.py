@@ -150,7 +150,7 @@ cards = [
 
 @bot.tree.command(name="tarot", description="Sends you a random tarot card, with its meaning.")
 async def tarot(interaction: discord.Interaction):
-   card = cards[randInt(0,78)]
+   card = cards[random.randint(0,77)]
    await interaction.response.send_message(f"{card}")
 
 if __name__ == "__main__":
