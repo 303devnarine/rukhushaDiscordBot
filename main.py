@@ -43,14 +43,12 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-	return
-
    await bot.process_commands(message)
 
 @bot.tree.command(name="coinflip", description="Flips a coin.")
 async def coinflip(interaction: discord.Interaction):
    username = interaction.user.mention
-   await interaction.response.send_message(f"{username}, the coin landed on {"Heads" if random.randint(0, 1) == 0 else "Tails"}.")
+   await interaction.response.send_message(f"{username}, the coin landed on {'Heads' if random.randint(0, 1) == 0 else 'Tails'}.")
 
 @bot.tree.command(name="inspirational_quote", description="Sends you an inspiration quote!")
 async def inspirational_quote(interaction: discord.Interaction):
@@ -148,7 +146,8 @@ cards = [
 @bot.tree.command(name="tarot", description="Sends you a random tarot card, with its meaning.")
 async def tarot(interaction: discord.Interaction):
    card = cards[random.randint(0,77)]
-   await interaction.response.send_message(f"{card}")
+   reversed = random.randint(0, 1) == 0
+   await interaction.response.send_message(f"{card[1].upper()}{'- REVERSED' if reversed else ''}\n{card[2]}\n{'{card[4]}' if reversed else '{card[4]}'}")
 
 if __name__ == "__main__":
    # Start Flask server in a separate thread
