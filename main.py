@@ -40,13 +40,10 @@ def run_flask():
 async def on_ready():
    print(f"{bot.user} is online")
    await bot.tree.sync()
-   await interaction.response.send_message("well well well. look who came.")
 
 @bot.event
 async def on_message(message):
-   if message.author != bot.user:
-      await interaction.response.send_message(":")
-      return
+	return
 
    await bot.process_commands(message)
 
