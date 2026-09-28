@@ -8,7 +8,7 @@ import random
 from inspirational_quotes import quote
 from threading import Thread
 from flask import Flask
-from tarot import TarotDeck 
+from enum import Enum
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
