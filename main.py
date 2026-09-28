@@ -147,7 +147,7 @@ cards = [
 async def tarot(interaction: discord.Interaction):
    card = cards[random.randint(0,77)]
    reversed = random.randint(0, 1) == 0
-   await interaction.response.send_message(f"***{card[1].upper()}{' - REVERSED' if reversed else ''}***\n*{card[2].value}*\n*"""{card[4] if reversed else card[3]}"""*")
+   await interaction.response.send_message(f"***{card[1].upper()}{' - REVERSED' if reversed else ''}***\n*\"{card[2].value}*\n*{card[4] if reversed else card[3]}\"*")
 
 if __name__ == "__main__":
    # Start Flask server in a separate thread
